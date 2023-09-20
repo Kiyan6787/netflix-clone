@@ -36,9 +36,17 @@ export default NextAuth({
       async authorize(credentials) {
         const email = credentials?.email;
         const password = credentials?.password;
+        console.log('Credentials:', credentials);
 
-        if (credentials?.email || credentials?.password) {
+        /*if (credentials?.email || credentials?.password) {
           throw new Error('Email and Password required');
+         }*/
+
+        if (!credentials?.email) {
+          throw new Error("Email and Password Req");
+        }
+        else if (!credentials?.password) {
+          throw new Error('Email and Password Req')
         }
 
         const user = await client.user.findUnique({
